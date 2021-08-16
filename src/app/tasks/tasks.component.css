@@ -1,0 +1,19 @@
+.navbar {
+    background-color: #3b2349;
+    font-family: 'Roboto', sans-serif;
+}
+
+.submit-form {
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+#tasks{
+    max-width: 300px;
+    display: flexbox;
+}
+
+#task-form{
+    max-width: 350px;
+}
+  

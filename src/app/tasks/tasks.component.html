@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">TAREAS</a>
+  </div>
+</nav>
+<div class="row p-2">
+  <div id="task-form">
+    <div class="col card">
+      <div class="card-header">
+        <h4>NUEVA TAREA</h4>
+      </div>
+      <div class="card-body">
+        <div class="submit-form">
+          <div *ngIf="!submitted">
+            <div class="form-group">
+              <label for="title">Titulo</label>
+              <input [(ngModel)]="task.title" type="text" class="form-control" id="title" required name="title"
+                value="{{ currentTask.title }}" />
+            </div>
+            <div class="form-group">
+              <label for="description">Descripcion</label>
+              <input [(ngModel)]="task.description" class="form-control" id="description" required name="description"
+                value="{{ currentTask.description }}" />
+            </div>
+            <button class="m-1 btn btn-dark" (click)="saveTask()">Guardar Tarea</button>
+            <button *ngIf="!isEmptyObject(currentTask)" class="m-1 btn btn-primary" (click)="updateTask()">Editar
+              Tarea</button>
+          </div>
+          <div *ngIf="submitted">
+            <h4>Tarea guardada!</h4>
+            <button class="mt-2 btn btn-dark" (click)="newTask()">Nueva Tarea</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Buscar por titulo" [(ngModel)]="data"/>
+        <div class="input-group-append">
+          <button 
+            class="btn btn-outline-secondary" 
+            type="button"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h4>Lista de Tareas</h4>
+      <div id="tasks">
+        <div class="card text-white bg-dark mb-3 task-card" *ngFor="let task of tasks| filter:data; let i = index"
+          [class.active]="i == currentIndex" (click)="setActiveTask(task, i)">
+          <div class="card-header">
+            <h5 class="card-title">{{ task.title }}</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ task.description }}</p>
+          </div>
+          <button class="m-2 btn btn-danger" (click)="deleteTask(task)">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
